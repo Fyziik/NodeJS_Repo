@@ -20,7 +20,7 @@ friends.push({
 
 friends.push({
     "name": "Ida",
-    "age": 17
+    "age": 20
 })
 
 friends.push({
@@ -76,7 +76,7 @@ console.log(dinnerTray)
 const lettersExpanded = ["a","b","c", "d", "e", "f", "g", "h"];
 
 // log every second char in the array starting from b
-for (let k = 1; k < lettersExpanded.length; k = k + 2) {
+for (let k = 1; k < lettersExpanded.length; k += 2) {
     console.log(lettersExpanded[k])
 }
 
@@ -92,9 +92,11 @@ const discardedNumbers = [];
 // else push them to the array discardedNumbers
 
 for (let m = 0; m < numbers.length; m++) {
+
     if (numbers[m] > 6 || numbers[m] < 0) {
         console.log(numbers[m])
     }
+
     else {
         discardedNumbers.push(numbers[m])
     }
