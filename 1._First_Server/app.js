@@ -79,29 +79,31 @@ app.get("/users/:id", (req, res) => {
 })
 
 // HTTP POST
-// Add user from form with data, and redirect to homepage 
-app.post("/users", (req, res) => {
-    const index = userDatabase[userDatabase.length - 1].id + 1
-
-    const newUser = {
-        id: index,
-        name: `${req.body.name}`,
-        url: `${req.body.url}`
-    }
-
-    userDatabase.push(newUser)
-
-    res.redirect("/")
-})
-
-// Add user from form with data and manually set id, then redirect to homepage
+// Add user from form with data, and redirect to homepage
 app.post("/users/id", (req, res) => {
 
+    let newUser = {}
+
     //Should return error if index already exists in DB, but for now we dont care
-    const newUser = {
+    //If an ID is included, do this
+    if ( Number(`${req.body.id}` != 0 )) {
+        newUser = {
         id: Number(`${req.body.id}`),
         name: `${req.body.name}`,
         url: `${req.body.url}`
+        }
+    }
+    
+
+    //If an ID is not included, do this
+    else {
+        const index = userDatabase[userDatabase.length - 1].id + 1
+
+        newUser = {
+            id: index,
+            name: `${req.body.name}`,
+            url: `${req.body.url}`
+        }
     }
 
     userDatabase.push(newUser)
