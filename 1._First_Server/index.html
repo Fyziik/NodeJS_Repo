@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Homepage</title>
+    </head>
+
+    <body>
+        <h1>Welcome to my page</h1>
+        
+        <h3>Form for adding a new user without ID</h3>
+        <form method="POST" action="/users">
+            <p>Name</p>
+            <input type="text" placeholder="Andreas" name="name">
+            <p>Website url</p>
+            <input type="text" placeholder="https://www.something.com" name="url">
+            <button type="submit">Submit</button>
+        </form>
+
+        <h3>Form for adding a new user with ID</h3>
+        <form method="POST" action="/users/id">
+            <p>Name</p>
+            <input type="text" placeholder="Andreas" name="name">
+            <p>Website url</p>
+            <input type="text" placeholder="https://www.something.com" name="url">
+            <p>ID</p>
+            <input type="text" placeholder="1 2 3" name="id">
+            <button type="submit">Submit</button>
+        </form>
+
+        
+    </body>
+
+</html>
