@@ -6,6 +6,28 @@
         <title>Homepage</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+        <style>
+
+            h1 {
+                font-size: 4em;
+                font-weight: bold;
+            }
+
+            h3 {
+                font-size: 2.7em;
+                font-weight: bold;
+            }
+
+            span {
+                margin-right: 5%;
+            }
+
+            .bold {
+                font-weight: bold;
+            }
+
+        </style>
+
     </head>
 
     <body>
@@ -14,19 +36,19 @@
 
             <h1 class="d-flex justify-content-center">Welcome to my page</h1>
 
-            <div class="jumbotron">
+            <div class="jumbotron d-flex justify-content-center">
                 
-                <div>
+                <div class="bold">
                     <h3>Form for adding a new user</h3>
                     <form method="POST" action="/users/id">
-                        <p>Name</p>
-                        <input type="text" placeholder="Andreas" name="name">
-                        <p>Website url</p>
-                        <input type="text" placeholder="https://www.something.com" name="url">
-                        <p>ID - can not be 0</p>
-                        <input type="text" placeholder="1 2 3" name="id">
+                        <span>Name</span><br>
+                        <input type="text" placeholder="Andreas" name="name"> <br>
+                        <span>Website url</span><br>
+                        <input type="text" placeholder="https://www.something.com" name="url"> <br>
+                        <span>Manual ID, does not have to be included (can not be 0)</span><br>
+                        <input type="text" placeholder="1 2 3" name="id"> <br>
                         <button class="btn btn-success" type="submit">Submit</button>
-                        <button class="btn btn-danger">Clear form</button>
+                        <button class="btn btn-danger" type="reset">Clear form</button>
                     </form>
                 </div>
 

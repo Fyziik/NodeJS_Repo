@@ -8,7 +8,7 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({extended: true}))
 
 //Mock-up databases
-const userDatabase = [
+let userDatabase = [
     {
         id: 0,
         name: "Andreas",
@@ -26,7 +26,7 @@ const userDatabase = [
     }
 ]
 
-const carsDatabase = [
+let carsDatabase = [
     {
         id: 0,
         manufactor: "Volvo",
@@ -87,17 +87,30 @@ app.post("/users/id", (req, res) => {
     //Should return error if index already exists in DB, but for now we dont care
     //If an ID is included, do this
     if ( Number(`${req.body.id}` != 0 )) {
-        newUser = {
-        id: Number(`${req.body.id}`),
-        name: `${req.body.name}`,
-        url: `${req.body.url}`
+        
+        //Make array of already taken IDs, and check if user ID already exists
+        const takenIds = []
+        userDatabase.forEach(element => {
+            takenIds.push(element.id)
+        });
+
+        if (!takenIds.includes(Number(`${req.body.id}`))) {
+            newUser = {
+            id: Number(`${req.body.id}`),
+            name: `${req.body.name}`,
+            url: `${req.body.url}`
+            }
+        
         }
     }
     
 
     //If an ID is not included, do this
     else {
-        const index = userDatabase[userDatabase.length - 1].id + 1
+        let index = 0
+        if (userDatabase.length != 0) {
+            index = userDatabase[userDatabase.length - 1].id + 1
+        }
 
         newUser = {
             id: index,
@@ -108,6 +121,43 @@ app.post("/users/id", (req, res) => {
 
     userDatabase.push(newUser)
 
+    res.redirect("/")
+})
+
+
+
+
+
+// HTTP PUT/PATCH
+
+
+
+
+
+// HTTP DELETE
+// Use Postman for testing these out
+// Delete all users from the database
+app.delete("/users", (req, res) => {
+    userDatabase = []
+
+    res.redirect("/")
+})
+
+app.delete("/users/:id", (req, res) => {
+
+    let indexOfUser = -1
+
+    for (let k = 0; k < userDatabase.length; k++) {
+
+        if (req.params.id == userDatabase[k].id) {
+            indexOfUser = k
+        }
+    }
+
+    if ( indexOfUser > -1 ) {
+        userDatabase.splice(indexOfUser, 1)
+    }
+    
     res.redirect("/")
 })
 
