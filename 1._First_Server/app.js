@@ -53,15 +53,30 @@ app.get("/", (req, res) => {
     res.sendFile(home)
 })
 
+// School exercises during class
+app.get("/welcome", (req, res) => {
+    res.send("<h1 style=\"color: red\"> Welcome </h1>")
+})
 
-
+app.get("/me", (req, res) => {
+    res.send({
+        age: 25,
+        name: "Andreas",
+        hobbies: [
+            "Gaming",
+            "Coding",
+            "Music",
+            "And even more"
+        ]
+    })
+})
 
 
 // ---Users routing---
 // HTTP GET
 // Return entire list of users on /users
 app.get("/users", (req, res) => {
-    res.send({userDatabase})
+    res.send(userDatabase)
 })
 
 // Return specific user by id on /users/id
@@ -71,7 +86,7 @@ app.get("/users/:id", (req, res) => {
 
         if (userDatabase[k].id == req.params.id) {
 
-            res.send({ Found: userDatabase[k] })
+            res.send(userDatabase[k])
         }
     }
     
@@ -129,6 +144,26 @@ app.post("/users/id", (req, res) => {
 
 
 // HTTP PUT/PATCH
+app.put("/users/:id&:name&:url", (req, res) => {
+
+    console.log(req.params)
+
+    userDatabase.forEach( element => {
+
+        console.log(Number(element.id))
+        console.log("Element ID: " + element.id)
+
+        if (element.id === Number(req.params.id) ) {
+            element.name = req.params.name
+            element.url = req.params.url
+            console.log("HIT") 
+        }
+
+    })
+
+
+    res.redirect("/")
+})
 
 
 
@@ -186,7 +221,13 @@ app.get("/cars/:id", (req, res) => {
 
 
 
-app.listen(8080)
+app.listen(8080, (e) => {
+    if (e) {
+        console.log("Server crashed")
+    } else {
+        console.log("Server running on port 8080")
+    }
+})
 
 
 
